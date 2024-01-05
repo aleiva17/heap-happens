@@ -1,0 +1,28 @@
+{
+  "name": "heap-happens",
+  "version": "1.0.0",
+  "description": "Simple, flexible, and performant implementation of the heap data structure.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "homepage": "heap-happens.netlify.app",
+  "repository": {
+    "url": "git+https://github.com/aleiva17/heap-happens"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "heap",
+    "binary heap",
+    "priority queue",
+    "data structures",
+    "algorithm"
+  ],
+  "author": "Aleiva",
+  "license": "MIT",
+  "devDependencies": {
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.3"
+  }
+}
