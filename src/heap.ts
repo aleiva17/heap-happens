@@ -14,9 +14,9 @@ export class Heap<T> {
 
   /** Clears the existing elements in the heap and builds a new one from an array of elements. */
   buildFromArray(array: Array<T>): void {
-    this.elements = [];
-
     const len = array.length;
+    
+    this.elements = Array(len);
     let it = (len - 2) >> 1;
 
     for (let i = len - 1; i > it; --i) {
