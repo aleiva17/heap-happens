@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/aleiva17/heap-happens">
-    <img src="https://i.imgur.com/u8sEPPi.png" alt="Logo" width="80" height="80">
+    <img src="https://i.imgur.com/u8sEPPi.png" alt="Logo" width="120" height="120">
   </a>
 
   <h3 align="center">Heap happens docs</h3>
