@@ -32,9 +32,9 @@ export class Heap<T> {
 
   /** Clears the existing elements in the heap and builds a heap from an array of elements, applying a transformation function to each element before adding it to the heap. */
   buildFromMappedArray<U>(array: Array<U>, callback: (value: U, index?: number, array?: Array<U>) => T): void {
-    this.elements = [];
-
     const len = array.length;
+    
+    this.elements = Array(len);
     let it = (len - 2) >> 1;
 
     for (let i = len - 1; i > it; --i) {
