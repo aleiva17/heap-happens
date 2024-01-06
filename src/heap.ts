@@ -120,24 +120,23 @@ export class Heap<T> {
     }
   }
 
-  protected topDownHeapify(elements: Array<T>): void {
-    let index = 0;
+  protected topDownHeapify(elements: Array<T>, index?: number): void {
+    index ??= 0;
+    let childIndex = 2 * index + 1;
   
     while (2 * index + 1 < elements.length) {
-      const leftChildIndex = 2 * index + 1;
-      const rightChildIndex = leftChildIndex + 1;
+      childIndex = 2 * index + 1;
+      
+      if (childIndex + 1 < elements.length && this.hasHigherPriority(elements[childIndex + 1], elements[childIndex])) {
+        ++childIndex;
+      }
   
-      const bestPriorityIndex = 
-        rightChildIndex < elements.length && this.hasHigherPriority(elements[rightChildIndex], elements[leftChildIndex]) 
-          ? rightChildIndex 
-          : leftChildIndex;
-  
-      if (!this.hasHigherPriority(elements[bestPriorityIndex], elements[index])) {
+      if (!this.hasHigherPriority(elements[childIndex], elements[index])) {
         break;
       }
   
-      [elements[index], elements[bestPriorityIndex]] = [elements[bestPriorityIndex], elements[index]];
-      index = bestPriorityIndex;
+      [elements[index], elements[childIndex]] = [elements[childIndex], elements[index]];
+      index = childIndex;
     }
   }
 }
