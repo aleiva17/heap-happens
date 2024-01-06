@@ -409,7 +409,7 @@ console.log(array); // [ "Avi", "Foo", "Bar" ]
 <h3 id="to-sorted-array">toSortedArray</h3>
 
 #### Basic info
-- **Purpose:** Creates a new array containing all elements in the heap, sorted in ascending order based on their priority.
+- **Purpose:** Creates a new array containing all elements in the heap, sorted in order based on their priority.
 - **Parameters:** 
   - `callback?: (value: T, index?: number, array?: Array<T>) => U` (optional): A function to transform each element before adding it to the array. Defaults to returning the element itself.
 - **Return:** A new array containing the transformed elements.
