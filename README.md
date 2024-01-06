@@ -38,7 +38,7 @@ console.log(heap.toSortedArray(profile => profile.name)); // ["Foo", "Bar", "Avi
 
 ## Docs
 
-For better examples and details about the methods and good practices, please see the following [documentation website](https://heap-happens.netlify.app/).
+For better examples and details about the methods and good practices, please see the following [documentation](https://github.com/aleiva17/heap-happens/blob/master/docs.md).
 
 ## Contributing
 
