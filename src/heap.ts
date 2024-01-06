@@ -14,14 +14,38 @@ export class Heap<T> {
 
   /** Clears the existing elements in the heap and builds a new one from an array of elements. */
   buildFromArray(array: Array<T>): void {
-    this.elements = [];
-    array.forEach(element => this.push(element));
+    const len = array.length;
+    
+    this.elements = Array(len);
+    let it = (len - 2) >> 1;
+
+    for (let i = len - 1; i > it; --i) {
+      this.elements[i] = array[i];
+    }
+
+    while (it > -1) {
+      this.elements[it] = array[it];
+      this.topDownHeapify(this.elements, it);
+      --it;
+    }
   }
 
   /** Clears the existing elements in the heap and builds a heap from an array of elements, applying a transformation function to each element before adding it to the heap. */
   buildFromMappedArray<U>(array: Array<U>, callback: (value: U, index?: number, array?: Array<U>) => T): void {
-    this.elements = [];
-    array.forEach(element => this.push(callback(element)));
+    const len = array.length;
+    
+    this.elements = Array(len);
+    let it = (len - 2) >> 1;
+
+    for (let i = len - 1; i > it; --i) {
+      this.elements[i] = callback(array[i], i, array);
+    }
+
+    while (it > -1) {
+      this.elements[it] = callback(array[it], it, array);
+      this.topDownHeapify(this.elements, it);
+      --it;
+    }
   }
 
   /** Adds a new element to the heap. */
@@ -45,7 +69,7 @@ export class Heap<T> {
     [this.elements[this.elements.length - 1], this.elements[0]];
     
     const highestPriority = this.elements.pop();
-    this.topDownHeapify(this.elements);
+    this.topDownHeapify(this.elements, 0);
 
     return highestPriority;
   }
@@ -63,7 +87,7 @@ export class Heap<T> {
     while (copy.length > 0) {
       [copy[0], copy[copy.length - 1]] = [copy[copy.length - 1], copy[0]];
       array.push(callback(copy.pop()!));
-      this.topDownHeapify(copy);
+      this.topDownHeapify(copy, 0);
     }
     
     return array;
@@ -120,24 +144,22 @@ export class Heap<T> {
     }
   }
 
-  protected topDownHeapify(elements: Array<T>): void {
-    let index = 0;
+  protected topDownHeapify(elements: Array<T>, index: number): void {
+    let childIndex = 2 * index + 1;
   
     while (2 * index + 1 < elements.length) {
-      const leftChildIndex = 2 * index + 1;
-      const rightChildIndex = leftChildIndex + 1;
+      childIndex = 2 * index + 1;
+      
+      if (childIndex + 1 < elements.length && this.hasHigherPriority(elements[childIndex + 1], elements[childIndex])) {
+        ++childIndex;
+      }
   
-      const bestPriorityIndex = 
-        rightChildIndex < elements.length && this.hasHigherPriority(elements[rightChildIndex], elements[leftChildIndex]) 
-          ? rightChildIndex 
-          : leftChildIndex;
-  
-      if (!this.hasHigherPriority(elements[bestPriorityIndex], elements[index])) {
+      if (!this.hasHigherPriority(elements[childIndex], elements[index])) {
         break;
       }
   
-      [elements[index], elements[bestPriorityIndex]] = [elements[bestPriorityIndex], elements[index]];
-      index = bestPriorityIndex;
+      [elements[index], elements[childIndex]] = [elements[childIndex], elements[index]];
+      index = childIndex;
     }
   }
 }
