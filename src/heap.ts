@@ -16,15 +16,10 @@ export class Heap<T> {
   buildFromArray(array: Array<T>): void {
     const len = array.length;
     
-    this.elements = Array(len);
+    this.elements = array.slice();
+
     let it = (len - 2) >> 1;
-
-    for (let i = len - 1; i > it; --i) {
-      this.elements[i] = array[i];
-    }
-
     while (it > -1) {
-      this.elements[it] = array[it];
       this.topDownHeapify(this.elements, it);
       --it;
     }
@@ -145,11 +140,9 @@ export class Heap<T> {
   }
 
   protected topDownHeapify(elements: Array<T>, index: number): void {
-    let childIndex = 2 * index + 1;
+    let childIndex;
   
-    while (2 * index + 1 < elements.length) {
-      childIndex = 2 * index + 1;
-      
+    while ((childIndex = 2 * index + 1) < elements.length) {
       if (childIndex + 1 < elements.length && this.hasHigherPriority(elements[childIndex + 1], elements[childIndex])) {
         ++childIndex;
       }
@@ -157,8 +150,10 @@ export class Heap<T> {
       if (!this.hasHigherPriority(elements[childIndex], elements[index])) {
         break;
       }
-  
-      [elements[index], elements[childIndex]] = [elements[childIndex], elements[index]];
+      var tmp = elements[index];
+      elements[index] = elements[childIndex];
+      elements[childIndex] = tmp;
+      
       index = childIndex;
     }
   }
