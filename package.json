@@ -1,6 +1,6 @@
 {
   "name": "heap-happens",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Simple, flexible, and performant implementation of the heap data structure.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
