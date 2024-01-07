@@ -75,12 +75,12 @@ export class Heap<T> {
   }
 
   /** Creates a new array containing all elements in the heap. Can receive a callback to transform each element before adding it to the array. */
-  toArray<U>(callback: (value: T, index?: number, array?: Array<T>) => U = (value) => value! as U): Array<U> {
+  toArray<U>(callback: (value: T, index?: number, array?: Array<T>) => U = (value) => value as unknown as U): Array<U> {
     return this.elements.map((value, index, array) => callback(value, index, array));
   }
 
   /** Creates a new array containing all elements in the heap, sorted in ascending order based on their priority. Can receive a callback to transform each element before adding it to the array. */
-  toSortedArray<U>(callback: (value: T) => U = (value: T) => value! as U): Array<U> {
+  toSortedArray<U>(callback: (value: T) => U = (value: T) => value as unknown as U): Array<U> {
     const copy: Array<T> = [...this.elements];
     const array: Array<U> = [];
 
